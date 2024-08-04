@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowers4U - Order Flowers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Flowers4U</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="flowers.html">Our Flowers</a></li>
+                <li><a href="order.html">Order Online</a></li>
+                <li><a href="occasion-types.html">Occasions</a></li>
+                <li><a href="delivery-terms.html">Delivery Terms</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="order-form">
+            <h2>Place Your Order</h2>
+            <form action="confirmation.html" method="get" onsubmit="return validateForm()">
+                <fieldset>
+                    <legend>Flower Selection</legend>
+                    <label for="flower">Flower Choice:</label>
+                    <select id="flower" name="flower" required>
+                        <option value="" disabled selected>Select a flower</option>
+                        <option value="roses">Roses</option>
+                        <option value="lilies">Lilies</option>
+                        <option value="tulips">Tulips</option>
+                        <option value="daisies">Daisies</option>
+                        <!-- add flowers -->
+                    </select>
+
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" required>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Customer Details</legend>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" pattern="[A-Za-z\s]+" title="Name should contain only letters and spaces" required>
+
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" required>
+
+                    <label for="mobile">Mobile Number:</label>
+                    <input type="tel" id="mobile" name="mobile" pattern="\+?\d{10,15}" title="Please enter a valid phone number (10-15 digits)" required>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Delivery Details</legend>
+                    <label for="date">Delivery Date:</label>
+                    <input type="date" id="date" name="date" required>
+
+                    <label for="time">Delivery Time:</label>
+                    <input type="time" id="time" name="time" required>
+
+                    <label for="requests">Additional Requests:</label>
+                    <textarea id="requests" name="requests"></textarea>
+                </fieldset>
+
+                <input type="submit" value="Submit Order">
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Flowers4U. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function validateForm() {
+            // Validate flower choice
+            const flower = document.getElementById('flower').value;
+            if (!flower) {
+                alert('Please select a flower.');
+                return false;
+            }
+
+            // Validate quantity
+            const quantity = document.getElementById('quantity').value;
+            if (quantity < 1) {
+                alert('Quantity must be at least 1.');
+                return false;
+            }
+
+            // Validate name
+            const name = document.getElementById('name').value;
+            const namePattern = /^[A-Za-z\s]+$/;
+            if (!namePattern.test(name)) {
+                alert('Name should contain only letters and spaces.');
+                return false;
+            }
+
+            // Validate mobile number
+            const mobile = document.getElementById('mobile').value;
+            const mobilePattern = /^\+?\d{10,15}$/;
+            if (!mobilePattern.test(mobile)) {
+                alert('Please enter a valid phone number (10-15 digits).');
+                return false;
+            }
+
+            // Validate delivery date and time
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            if (!date || !time) {
+                alert('Please select a delivery date and time.');
+                return false;
+            }
+
+
+            return true; // Allow form submission if all checks pass
+        }
+    </script>
+</body>
+</html>
